@@ -36,3 +36,4 @@ RUN mv /var/www/kafka-topics-ui/env.js /temp.env.js \
 ADD kafka-topics-ui-demo.tar.gz /var/www/kafka-topics-ui
 RUN sed -e 's/localhost:8080/cloudera03.landoop.com:16885/g' -i /var/www/kafka-topics-ui/combined.js \
     && mv /temp.env.js /var/www/kafka-topics-ui/env.js
+ENV FORWARDLOGS=0 RUNTESTS=0
