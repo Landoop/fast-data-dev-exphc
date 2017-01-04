@@ -31,6 +31,8 @@ RUN mkdir /etc/supervisor.d/ \
 
 ADD backend.ini /etc/supervisor.d/
 ADD generator.ini /etc/supervisor.d/
-RUN rm -rf /var/www/kafka-topics-ui/*
+RUN mv /var/www/kafka-topics-ui/env.js /temp.env.js \
+    && rm -rf /var/www/kafka-topics-ui/*
 ADD kafka-topics-ui-demo.tar.gz /var/www/kafka-topics-ui
-RUN sed -e 's/localhost:8080/cloudera03.landoop.com:16885/g' -i /var/www/kafka-topics-ui/combined.js
+RUN sed -e 's/localhost:8080/cloudera03.landoop.com:16885/g' -i /var/www/kafka-topics-ui/combined.js \
+    && mv /temp.env.js /var/www/kafka-topics-ui/env.js
